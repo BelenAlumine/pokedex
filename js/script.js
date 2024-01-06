@@ -31,44 +31,38 @@ rootDiv.appendChild(hr);
 
 ///////////////////////////////////////////////////////////
 //buttons//
-const allBtn = document.createElement('button');
-const normalBtn = document.createElement('button');
-const fireBtn = document.createElement('button');
-const waterBtn = document.createElement('button');
-const grassBtn = document.createElement('button');
-const electricBtn = document.createElement('button');
-const iceBtn = document.createElement('button');
-const fightingBtn = document.createElement('button');
-const poisonBtn = document.createElement('button');
-const groundBtn = document.createElement('button');
-const flyingBtn = document.createElement('button');
-const psychicBtn = document.createElement('button');
-const bugBtn = document.createElement('button');
-const rockBtn = document.createElement('button');
-const ghostBtn = document.createElement('button');
-const darkBtn = document.createElement('button');
-const dragonBtn = document.createElement('button');
-const steelBtn = document.createElement('button');
-const fairyBtn = document.createElement('button');
+const buttonTypes = {
+    All: 'all',
+    Normal: 'normal',
+    Fire: 'fire',
+    Water: 'water', 
+    Grass: 'grass',
+    Electric: 'electric',
+    Ice: 'ice',
+    Fighting: 'fighting',
+    Poison: 'poison',
+    Ground: 'ground',
+    Flying: 'flying',
+    Psychic: 'psychic',
+    Bug: 'bug',
+    Rock: 'rock',
+    Ghost: 'ghost',
+    Dark: 'dark',
+    Dragon: 'dragon',
+    Steel: 'steel',
+    Fairy: 'fairy'
+}
 
-createBtn(allBtn, 'All', 'all');
-createBtn(normalBtn, 'Normal', 'normal');
-createBtn(fireBtn, 'Fire', 'fire');
-createBtn(waterBtn, 'Water', 'water');
-createBtn(electricBtn, 'Electric', 'electric');
-createBtn(iceBtn, 'Ice', 'ice');
-createBtn(fightingBtn, 'Fighting', 'fighting');
-createBtn(poisonBtn, 'Poison', 'poison');
-createBtn(groundBtn, 'Ground', 'ground');
-createBtn(flyingBtn, 'Flying', 'flying');
-createBtn(psychicBtn, 'Psychic', 'psychic');
-createBtn(bugBtn, 'Bug', 'bug');
-createBtn(rockBtn, 'Rock', 'rock');
-createBtn(ghostBtn, 'Ghost', 'ghost');
-createBtn(darkBtn, 'Dark', 'dark');
-createBtn(dragonBtn, 'Dragon', 'dragon');
-createBtn(steelBtn, 'Steel', 'steel');
-createBtn(fairyBtn, 'Fairy', 'fairy');
+function createBtns() {
+    for (const [typeName, typeClass] of Object.entries(buttonTypes)) {
+        const btn = document.createElement('button')
+        btn.innerHTML = typeName;        
+        btn.classList.add('button', typeClass);
+        buttonsContainer.appendChild(btn);
+    }
+}
+
+createBtns()
 
 ///////////////////////////////////////////////////////////
 
@@ -139,23 +133,20 @@ function showPokemon(poke) {
     nameContainer.appendChild(idPokemonName);
     nameContainer.appendChild(namePokemon);
 
-    //type
+    /////////////////////////////////////////////////////////
+    //TYPES//
     let pokemonType = document.createElement('div');
     pokemonType.classList.add('pokemon-type');
-
-
-    let type1 = document.createElement('p');
-    let txtType1 = document.createTextNode('psychic');
-    pokemonType.appendChild(type1);
-    type1.classList.add('type', 'psychic');
-    type1.appendChild(txtType1);
-
-    let type2 = document.createElement('p');
-    let txtType2 = document.createTextNode('psychic');
-    pokemonType.appendChild(type2);
-    type2.classList.add('type', 'psychic');
-    type2.appendChild(txtType2);
-
+    
+    for (const type of poke.types) {
+        const p = document.createElement('p')
+        p.classList.add('type');
+        p.innerText = type.name;
+        console.log(type);
+        pokemonType.appendChild(p);
+    }
+    
+    /////////////////////////////////////////////////////////
 
     //stats
     let pokemonStats = document.createElement('div');
@@ -174,7 +165,6 @@ function showPokemon(poke) {
     stat2.classList.add('stat');
     stat2.appendChild(txtStat2);
 
-
     pokemonInfo.appendChild(nameContainer);
     pokemonInfo.appendChild(pokemonType);
     pokemonInfo.appendChild(pokemonStats);
@@ -183,19 +173,15 @@ function showPokemon(poke) {
 
     //add pokemon to pokemons
     pokemons.appendChild(pokemon);
-
 }
-//
 
-
+function createType(typeP) {
+    let type1 = document.createElement('p');
+    let txtType1 = document.createTextNode(typeP.type.name);
+    type1.classList.add('type', typeP.type.name);
+    type1.appendChild(txtType1);
+    pokemonType.appendChild(type1);
+}
 
 
 ///////////////////////////////////////////////////////////
-//FUNCTIONS//
-
-
-function createBtn(nameBtn, txtBtn, classBtn) {
-    nameBtn.innerHTML = txtBtn;
-    nameBtn.classList.add('button', classBtn);
-    buttonsContainer.appendChild(nameBtn);
-}

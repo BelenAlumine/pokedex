@@ -27,7 +27,7 @@ img {
     width: 100%;
 }
 
-button {
+.button {
     margin: 3px;
     padding: 5px;
     border-radius: 6px;
