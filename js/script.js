@@ -142,6 +142,7 @@ function showPokemon(poke) {
         const p = document.createElement('p')
         p.classList.add('type', type.type.name);
         p.innerText = type.type.name;
+        console.log(type);
         pokemonType.appendChild(p);
     }
     
