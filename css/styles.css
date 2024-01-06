@@ -41,6 +41,10 @@ img {
     border: 3px solid greenyellow;
 }
 
+hr {
+    box-shadow: 0 0 -3rem -1rem rgba(0, 0, 0, .25);
+}
+
 /*POKEMON CONTAINER*/
 .pokemon-container {
     padding: 2rem;
@@ -167,6 +171,10 @@ img {
 
 .water {
     background-color: rgb(23, 208, 208);
+}
+
+.grass {
+    background-color: rgb(76, 224, 76);
 }
 
 .electric {

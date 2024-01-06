@@ -24,8 +24,6 @@ header.appendChild(buttonsContainer);
 const hr = document.createElement('hr');
 rootDiv.appendChild(hr);
 
-
-
 ///////////////////////////////////////////////////////////
 
 
@@ -58,7 +56,9 @@ function createBtns() {
         const btn = document.createElement('button')
         btn.innerHTML = typeName;        
         btn.classList.add('button', typeClass);
+        btn.setAttribute('id', typeClass);
         buttonsContainer.appendChild(btn);
+        //btn.addEventListener('click', () => filterByType(typeClass));
     }
 }
 
@@ -140,9 +140,8 @@ function showPokemon(poke) {
     
     for (const type of poke.types) {
         const p = document.createElement('p')
-        p.classList.add('type');
-        p.innerText = type.name;
-        console.log(type);
+        p.classList.add('type', type.type.name);
+        p.innerText = type.type.name;
         pokemonType.appendChild(p);
     }
     
@@ -175,13 +174,29 @@ function showPokemon(poke) {
     pokemons.appendChild(pokemon);
 }
 
-function createType(typeP) {
-    let type1 = document.createElement('p');
-    let txtType1 = document.createTextNode(typeP.type.name);
-    type1.classList.add('type', typeP.type.name);
-    type1.appendChild(txtType1);
-    pokemonType.appendChild(type1);
-}
-
-
 ///////////////////////////////////////////////////////////
+let buttons = document.querySelectorAll('button');
+
+buttons.forEach(boton => boton.addEventListener("click", (event) => {
+    const botonId = event.currentTarget.id;
+    pokemons.innerHTML = '';
+
+    for (let i = 1; i <= 151; i++) {
+        fetch(URL + i).then((response) => response.json())
+                      .then(data => {
+                        if (botonId === 'all') {
+                            showPokemon(data);
+                        }
+                        else {
+                            const types = data.types.map(type => type.type.name);
+                            console.log(types);
+                            //console.log(types.type.name);
+                            if (types.some(type => type.includes(botonId))) {
+                                console.log('hooola');
+                                showPokemon(data);
+                                console.log(types);
+                            }
+                        }
+                      })
+    }
+}))
