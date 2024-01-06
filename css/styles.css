@@ -169,6 +169,10 @@ img {
     background-color: rgb(23, 208, 208);
 }
 
+.grass {
+    background-color: rgb(76, 224, 76);
+}
+
 .electric {
     background-color: yellow;
 }

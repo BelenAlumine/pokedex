@@ -140,8 +140,8 @@ function showPokemon(poke) {
     
     for (const type of poke.types) {
         const p = document.createElement('p')
-        p.classList.add('type');
-        p.innerText = type.name;
+        p.classList.add('type', type.type.name);
+        p.innerText = type.type.name;
         console.log(type);
         pokemonType.appendChild(p);
     }
@@ -174,14 +174,5 @@ function showPokemon(poke) {
     //add pokemon to pokemons
     pokemons.appendChild(pokemon);
 }
-
-function createType(typeP) {
-    let type1 = document.createElement('p');
-    let txtType1 = document.createTextNode(typeP.type.name);
-    type1.classList.add('type', typeP.type.name);
-    type1.appendChild(txtType1);
-    pokemonType.appendChild(type1);
-}
-
 
 ///////////////////////////////////////////////////////////
